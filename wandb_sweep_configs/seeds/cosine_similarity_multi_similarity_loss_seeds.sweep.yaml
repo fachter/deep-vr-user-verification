@@ -1,0 +1,32 @@
+command:
+  - python3
+  - ${program}
+  - experiment=verification_head_search/similarity_head/verification_cosine_similarity_multi_similarity_loss.yaml
+  - ${args_no_hyphens}
+method: bayes
+metric:
+  goal: minimize
+  name: best_EER/validation
+name: verification_cosine_similarity_ms_loss_seed_search
+parameters:
+  lightning_module.loss_options.name:
+    value: MultiSimilarityLoss
+  lightning_module.loss_options.alpha:
+    value: 2.717
+  lightning_module.loss_options.beta:
+    value: 26.29
+  lightning_module.loss_options.base:
+    value: 0.4215
+  datamodule.common_dataset_kwargs.window_size:
+    value: 1500
+  datamodule.train_dataset_kwargs.take_every_nth_sample:
+    value: 1500
+  seed:
+    values:
+      - 97348
+      - 99999
+      - 1
+      - 66666666
+program: src/train.py
+project: deep-vr-user-verification
+entity: 99fe99

@@ -1,0 +1,13 @@
+# @package _global_
+
+defaults:
+  - verification_head_search/threshold_verification_head/base_threshold_head.yaml
+  - override /distance: kl_divergence_distance.yaml
+
+tags: ["kl_divergence_distance", "transformer", "triplet_margin_loss"]
+
+lightning_module:
+  loss_options:
+    # https://kevinmusgrave.github.io/pytorch-metric-learning/losses
+    name: "TripletMarginLoss"
+    margin: MISSING

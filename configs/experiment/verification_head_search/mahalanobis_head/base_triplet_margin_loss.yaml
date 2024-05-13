@@ -1,0 +1,35 @@
+# @package _global_
+
+defaults:
+  - verification_head_search/mahalanobis_head/base_mahalanobis_head.yaml
+  - override /datamodule: embedding_datamodule.yaml
+  - override /distance: lp_distance.yaml
+
+tags: ["transformer", "triplet_margin_loss", "mahalanobis"]
+
+lightning_module:
+  loss_options:
+    # https://kevinmusgrave.github.io/pytorch-metric-learning/losses
+    name: "TripletMarginLoss"
+    margin: MISSING
+
+datamodule:
+  data_split:
+    data_folder: ../data/boxrr-BRA-50_fps-600
+    train: 80
+    validation: 40
+    test: 480
+    seed: 12345
+    checksum: dea373b07ad73d2faf46b8fc620bbc9c6f31d135781ed2139c60e1581a096311
+  batch_size: 150
+  common_dataset_kwargs:
+    window_size: MISSING
+    max_files_to_load_at_once: 16
+    coordinate_system:
+      forward: "x"
+      right: "z"
+      up: "y"
+  train_dataset_kwargs:
+    take_every_nth_sample: MISSING
+  validation_dataset_kwargs:
+    take_every_nth_sample: 3000

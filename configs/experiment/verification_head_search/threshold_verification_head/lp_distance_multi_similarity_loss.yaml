@@ -1,0 +1,19 @@
+# @package _global_
+
+defaults:
+  - verification_head_search/threshold_verification_head/base_threshold_head.yaml
+  - override /distance: lp_distance.yaml
+
+tags: ["lp_distance", "transformer", "multi_similarity_loss"]
+
+lightning_module:
+  loss_options:
+    # https://kevinmusgrave.github.io/pytorch-metric-learning/losses
+    name: "MultiSimilarityLoss"
+    alpha: MISSING
+    beta: MISSING
+    base: MISSING
+
+distance:
+  normalize_embeddings: MISSING
+  p: MISSING

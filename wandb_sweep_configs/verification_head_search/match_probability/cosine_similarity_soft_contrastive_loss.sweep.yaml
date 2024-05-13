@@ -1,0 +1,19 @@
+command:
+  - python3
+  - ${program}
+  - experiment=verification_head_search/match_probability/cosine_similarity_soft_contrastive_loss.yaml
+  - ${args_no_hyphens}
+method: bayes
+metric:
+  goal: minimize
+  name: best_EER/validation
+name: transformer_match_prob_head_cs_scl
+parameters:
+  datamodule.common_dataset_kwargs.window_size:
+    values: [150, 500, 1500]
+  datamodule.train_dataset_kwargs.take_every_nth_sample:
+    value: 1500
+
+program: src/train.py
+project: deep-vr-user-verification
+entity: 99fe99

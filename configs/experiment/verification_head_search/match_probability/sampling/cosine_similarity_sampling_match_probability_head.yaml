@@ -1,0 +1,7 @@
+# @package _global_
+
+defaults:
+  - verification_head_search/match_probability/sampling/base_sampling_match_probability_head.yaml
+  - override /distance: cosine_similarity.yaml
+
+tags: ["cosine_similarity", "transformer", "hib_loss"]

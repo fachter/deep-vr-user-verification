@@ -1,0 +1,13 @@
+# @package _global_
+
+defaults:
+  - verification_head_search/similarity_head/base_similarity_head.yaml
+  - override /distance: lp_similarity.yaml
+
+tags: ["lp_similarity", "transformer", "triplet_margin_loss"]
+
+lightning_module:
+  loss_options:
+    # https://kevinmusgrave.github.io/pytorch-metric-learning/losses
+    name: "TripletMarginLoss"
+    margin: MISSING

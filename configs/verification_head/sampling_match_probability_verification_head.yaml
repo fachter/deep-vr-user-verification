@@ -1,0 +1,5 @@
+_target_: src.verification_heads.SamplingMatchProbabilityVerificationHead
+
+
+defaults:
+  - /distance: lp_distance.yaml

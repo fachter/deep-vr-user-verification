@@ -1,0 +1,25 @@
+command:
+  - python3
+  - ${program}
+  - experiment=verification_head_search/threshold_verification_head/kl_div_triplet_margin_loss.yaml
+  - ${args_no_hyphens}
+method: bayes
+metric:
+  goal: minimize
+  name: best_EER/validation
+name: threshold_kl_div_triplet_margin_loss
+parameters:
+  lightning_module.loss_options.margin:
+    distribution: log_uniform_values
+    min: 0.01
+    max: 0.5
+  datamodule.common_dataset_kwargs.window_size:
+    values: [ 500, 1000, 1500 ]
+  datamodule.train_dataset_kwargs.take_every_nth_sample:
+    distribution: q_uniform
+    min: 1000
+    max: 2000
+    q: 500
+program: src/train.py
+project: deep-vr-user-verification
+entity: 99fe99

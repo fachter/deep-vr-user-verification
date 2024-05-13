@@ -1,0 +1,36 @@
+command:
+  - python3
+  - ${program}
+  - experiment=verification_head_search/mahalanobis_head/cluster_search_multi_similarity_loss.yaml
+  - ${args_no_hyphens}
+method: bayes
+metric:
+  goal: minimize
+  name: best_EER/validation
+name: mahalanobis_multi_similarity_3_cluster
+parameters:
+  verification_head.k_cluster:
+    value: 3
+  verification_head.n_closest:
+    value: null
+  lightning_module.loss_options.name:
+    value: MultiSimilarityLoss
+  lightning_module.loss_options.alpha:
+    value: 2
+  lightning_module.loss_options.beta:
+    value: 50
+  lightning_module.loss_options.base:
+    value: 1
+  datamodule.common_dataset_kwargs.window_size:
+    distribution: q_uniform
+    min: 500
+    max: 1500
+    q: 500
+  datamodule.train_dataset_kwargs.take_every_nth_sample:
+    distribution: q_uniform
+    min: 1000
+    max: 2000
+    q: 500
+program: src/train.py
+project: deep-vr-user-verification
+entity: 99fe99

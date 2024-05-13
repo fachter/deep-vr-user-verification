@@ -1,0 +1,68 @@
+# @package _global_
+
+defaults:
+  - override /model: simple_transformer_model.yaml
+  - override /datamodule: embedding_datamodule.yaml
+  - override /lightning_module: verification_embedding_module.yaml
+  - override /callbacks: embedding.yaml
+  - override /monitored_metrics: embedding.yaml
+  - override /trainer: gpu.yaml
+  - override /logger: wandb.yaml
+  - override /verification_head: distance_match_probability_verification_head
+  - override /distance: lp_distance.yaml
+
+run_group: transformer
+
+tags: ["mahalanobis", "transformer", "triplet_margin_loss"]
+
+seed: 12345
+logger:
+  wandb:
+    tags: ${tags}
+    group: ${group}
+
+auto_scale_batch_size: False
+
+trainer:
+  max_epochs: 1000
+  min_epochs: 300
+  check_val_every_n_epoch: 5
+  log_every_n_steps: 10
+
+datamodule:
+  data_split:
+    data_folder: ../data/bra_50_fps-600_users
+    train: 400
+    validation: 20
+    test: 150
+    seed: 12345
+    checksum: dea373b07ad73d2faf46b8fc620bbc9c6f31d135781ed2139c60e1581a096311
+  batch_size: 100
+  common_dataset_kwargs:
+    window_size: 1500
+    max_files_to_load_at_once: 20
+    coordinate_system:
+      forward: "x"
+      right: "z"
+      up: "y"
+  train_dataset_kwargs:
+    take_every_nth_sample: 3000
+  validation_dataset_kwargs:
+    take_every_nth_sample: 3000
+ 
+lightning_module:
+  optimizer_options:
+    lr: 0.00001
+#  loss_options:
+#    name: "TripletMarginLoss"
+
+model:
+  num_out_classes: 1024
+  d_model: 256
+  dim_feedforward: 450
+  dropout_frames: 0.15
+  pe_dropout: 0
+  dropout_global: 0
+  nhead: 32
+  num_layers: 1
+  positional_encoding: False

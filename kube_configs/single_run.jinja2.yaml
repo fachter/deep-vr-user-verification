@@ -1,0 +1,65 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ job_name }}
+  namespace: studachter
+spec:
+  template:
+    spec:
+      priorityClassName: research-low
+      containers:
+        - name: ml-container
+          image: ls6-stud-registry.informatik.uni-wuerzburg.de/studachter/deep-vr-user-auth-environment:0.2.1
+          imagePullPolicy: "IfNotPresent"
+          env:
+            - name: WANDB_API_KEY
+              value: dbc6061d0a7be0657c49e2448aad0197c8a0327b
+            - name: HOME
+              value: "/workspace"
+            - name: PYTHONPATH
+              value: "/workspace"
+            - name: NUMBA_CACHE_DIR
+              value: "/tmp"
+            - name: HYDRA_FULL_ERROR
+              value: "1"
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+          volumeMounts:
+            #            - mountPath: /data
+            #              name: cached-data
+            - mountPath: /workspace
+              name: local-data
+            - mountPath: /dev/shm # fixes a common pytorch issue. just always mount this here
+              name: dshm
+          resources:
+            limits:
+              nvidia.com/gpu: "{{ gpus }}"
+              cpu: "{{ cpus }}"
+              memory: "{{ memory }}Gi"
+            requests:
+              nvidia.com/gpu: "{{ gpus }}"
+              cpu: "{{ cpus }}"
+              memory: "{{ memory }}Gi"
+          #          command: ["python3", "run.py"]
+          command: ["python3", "src/train.py", "experiment={{experiment}}"]
+          args: []
+      imagePullSecrets:
+        - name: lsx-registry
+      restartPolicy: "Never"
+      volumes:
+        - name: local-data
+          cephfs:
+            monitors:
+              - 132.187.14.16
+              - 132.187.14.17
+              - 132.187.14.19
+              - 132.187.14.20  # Not important for you, just copy along
+            user: studachter  # <namespace>
+            path: "/home/stud/achter/masterthesis/deep-vr-user-authentication" # The path you want to mount
+            secretRef: # The name of the secret for auth. Is always "ceph-secret"
+              name: ceph-secret
+        - name: dshm # "needs" to be copied along, see above
+          emptyDir:
+            medium: "Memory"

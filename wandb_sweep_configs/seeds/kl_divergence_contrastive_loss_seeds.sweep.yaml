@@ -1,0 +1,28 @@
+command:
+  - python3
+  - ${program}
+  - experiment=verification_head_search/threshold_verification_head/kl_div_contrastive_loss.yaml
+  - ${args_no_hyphens}
+method: bayes
+metric:
+  goal: minimize
+  name: best_EER/validation
+name: threshold_kl_div_contrastive_loss_seed_search
+parameters:
+  lightning_module.loss_options.pos_margin:
+    value: 0.05
+  lightning_module.loss_options.neg_margin:
+    value: 0.5
+  datamodule.common_dataset_kwargs.window_size:
+    value: 1500
+  datamodule.train_dataset_kwargs.take_every_nth_sample:
+    value: 1000
+  seed:
+    values:
+      - 97348
+      - 99999
+      - 1
+      - 66666666
+program: src/train.py
+project: deep-vr-user-verification
+entity: 99fe99

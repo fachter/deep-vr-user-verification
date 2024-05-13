@@ -1,0 +1,13 @@
+# @package _global_
+
+defaults:
+  - verification_head_search/similarity_head/base_similarity_head.yaml
+  - override /distance: lp_similarity.yaml
+
+tags: ["lp_similarity", "transformer", "contrastive_loss"]
+
+lightning_module:
+  loss_options:
+    name: "ContrastiveLoss"
+    pos_margin: MISSING
+    neg_margin: MISSING

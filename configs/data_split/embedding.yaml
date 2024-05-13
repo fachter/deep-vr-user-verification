@@ -1,0 +1,7 @@
+_target_: src.data_split.EmbeddingDataSplit
+
+data_folder: MISSING
+train: MISSING
+validation: MISSING
+test: MISSING
+seed: MISSING

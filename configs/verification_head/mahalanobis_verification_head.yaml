@@ -1,0 +1,9 @@
+
+_target_: src.verification_heads.MahalanobisVerificationHead
+
+
+defaults:
+  - /distance: lp_distance.yaml
+
+k_cluster: 4
+n_closest: null

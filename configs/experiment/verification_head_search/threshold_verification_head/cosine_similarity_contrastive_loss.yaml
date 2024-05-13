@@ -1,0 +1,13 @@
+# @package _global_
+
+defaults:
+  - verification_head_search/threshold_verification_head/base_threshold_head.yaml
+  - override /distance: cosine_similarity.yaml
+
+tags: ["cosine_similarity", "transformer", "contrastive_loss"]
+
+lightning_module:
+  loss_options:
+    name: "ContrastiveLoss"
+    pos_margin: MISSING
+    neg_margin: MISSING

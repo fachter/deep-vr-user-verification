@@ -1,0 +1,13 @@
+_target_: src.models.simple_transformer_model.SimpleTransformerModel
+
+num_out_classes: MISSING
+window_size: ${datamodule.common_dataset_kwargs.window_size}
+
+d_model: MISSING
+dim_feedforward: MISSING
+dropout_frames: MISSING
+pe_dropout: MISSING
+dropout_global: MISSING
+nhead: MISSING
+num_layers: MISSING
+positional_encoding: "tape"

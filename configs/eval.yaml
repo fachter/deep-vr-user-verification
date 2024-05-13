@@ -1,0 +1,54 @@
+# @package _global_
+
+defaults:
+  - _self_
+  - model: simple_transformer_model.yaml
+  - datamodule: embedding_datamodule.yaml
+  - lightning_module: verification_embedding_module.yaml
+  - paths: default.yaml
+  - extras: default.yaml
+  - hydra: default.yaml
+  - experiment: null
+
+  # config for hyperparameter optimization
+  - hparams_search: null
+
+  # optional local config for machine/user specific settings
+  # it's optional since it doesn't need to exist and is excluded from version control
+  - optional local: default.yaml
+
+  # debugging config (enable through command line, e.g. `python train.py debug=default)
+  - debug: null
+
+# task name, determines output directory path
+task_name: "eval"
+
+# tags to help you identify your experiments
+# you can overwrite this in experiment configs
+# overwrite from command line with `python train.py tags="[first_tag, second_tag]"`
+tags: ["dev"]
+
+# set False to skip model training
+train: True
+
+# set to True to easier test validation phase
+validate_before_train: True
+
+# evaluate on test set, using best model weights achieved during training
+# lightning chooses best weights based on the metric specified in checkpoint callback
+test: True
+
+# compile model for faster training with pytorch 2.0
+compile: False
+
+# simply provide checkpoint path to resume training
+ckpt_path: null
+run_id: ???
+
+# seed for random number generators in pytorch, numpy and python.random
+seed: null
+
+group: evaluation
+
+torch_matmul_precision: "medium"
+

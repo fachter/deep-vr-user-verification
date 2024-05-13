@@ -1,0 +1,28 @@
+command:
+  - python3
+  - ${program}
+  - experiment=verification_head_search/match_probability/sampling/base_sampling_match_probability_head.yaml
+  - ${args_no_hyphens}
+method: bayes
+metric:
+  goal: minimize
+  name: best_EER/validation
+name: transformer_sampling_match_prob_head_scl
+parameters:
+  distance.normalize_embeddings:
+    values: [True, False]
+  datamodule.common_dataset_kwargs.window_size:
+    values: [150, 500, 1500]
+  datamodule.train_dataset_kwargs.take_every_nth_sample:
+    value: 1500
+  lightning_module.loss_options.beta:
+    values:
+      - 0.1
+      - 0.01
+      - 0.001
+      - 0.0001
+      - 0.00001
+
+program: src/train.py
+project: deep-vr-user-verification
+entity: 99fe99

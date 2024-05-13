@@ -1,0 +1,5 @@
+_target_: src.models.mlp_model.MLPModel
+
+layer_size: MISSING
+number_of_layers: MISSING
+activation_function: "Tanh"

@@ -1,0 +1,7 @@
+# @package _global_
+
+defaults:
+  - verification_head_search/match_probability/base_match_probability_head.yaml
+  - override /distance: kl_divergence_distance.yaml
+
+tags: ["kl_divergence_distance", "transformer", "soft_contrastive_loss"]

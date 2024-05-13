@@ -1,0 +1,29 @@
+# @package _global_
+
+defaults:
+  - _self_
+  - model: simple_transformer_model.yaml
+  - datamodule: embedding_datamodule.yaml
+  - lightning_module: verification_embedding_module.yaml
+  - paths: default.yaml
+  - extras: default.yaml
+  - hydra: default.yaml
+  - experiment: null
+
+# task name, determines output directory path
+task_name: "eval_multi"
+
+# tags to help you identify your experiments
+# you can overwrite this in experiment configs
+# overwrite from command line with `python train.py tags="[first_tag, second_tag]"`
+tags: ["dev"]
+
+# seed for random number generators in pytorch, numpy and python.random
+seed: 12345
+
+group: final_testing
+
+torch_matmul_precision: "medium"
+
+
+#[xxz0dlm4,dcpaej4m,n86px5jy,prnumcr8,ta89ykti,egy6mtpl,ipcm9nxf,632tiqto,jrnpy4t7,cnkj3lo4,nsp4rwuw,xv912bw0,za1u9x9u,x9q3a0xg,mgdmvvxy,a4sl1h6p,gm19evvx,2f40i3i1,5gf3xxoz,p8ht5n1z,vog26dsv,uchb0r3b,1tk90dfi,1gi2b5vs,w3h8scsr,gbu58ki1,f614pvxl,vgcax5l4,5wqz3p69,t59nk5mz,an18gub7,4p440wrm,rlxs7isz,rhs926mf,977wbzwk,x1djd0vo,9jvcjgxm,6urnd05d,ik4l533n,kxu1vvnn,xxipfd6r,6f8b4zzb,0ykjnm5i,xswdcgef,44dagx29,vmny4ipd,50647mzx,yp3ixlyl,dzk63kfd,kio1mhv0,qop5c2fd,xwa82ho8,f00whrv2,lyej9jg6,2bs2dxcn,zwpz9hce,1fvry7no,bmftjo54,nt7zos3e,jjsqq7p2,q8xf7mlm,szzw791q,vzy0hyr8,ruonkthu,451vf4t7,d9wm3qx4,jr6xhrmo,7rt0bye7,g92zqhn5,nqgbe4lh,sro9sua4,np08jaya,p5dbj7f1,qcnf4b46,rhld0nuz,3yo30dz5,ermfoif1,2ovaa0ah,am0gnunf,iqytrn3q,8ud4wp69,tmiiipp6,d5ct041f,qrz7ziv4,cnrk53m6,n1p5eeda,waijqqmz,0bq0nkha]

@@ -1,0 +1,7 @@
+_target_: src.datamodules.embedding_chained_datamodule.EmbeddingChainedDatamodule
+
+defaults:
+  - /data_split: embedding.yaml
+
+batch_size: MISSING
+data_stats_path: ${paths.output_dir}/train_stats.json

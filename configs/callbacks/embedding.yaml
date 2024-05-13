@@ -1,0 +1,77 @@
+training_checkpoint:
+  _target_: lightning.pytorch.callbacks.ModelCheckpoint
+  monitor: "loss_train" # name of the logged metric which determines when model is improving
+  mode: "min" # can be "max" or "min"
+  save_top_k: 1 # save k best models (determined by above metric)
+  save_last: True
+  verbose: False
+  dirpath: "${paths.output_dir}/checkpoints/"
+  filename: "epoch_{epoch:03d}_min_loss"
+  auto_insert_metric_name: False
+
+early_stopping:
+ _target_: lightning.pytorch.callbacks.EarlyStopping
+ monitor: "precision_at_1/validation"
+ min_delta: 0.002
+ mode: max
+ patience: 10
+ verbose: True
+ strict: False
+ stopping_threshold: 1
+ divergence_threshold: 0.05
+
+precision_at_1_checkpoint:
+  _target_: lightning.pytorch.callbacks.ModelCheckpoint
+  monitor: "precision_at_1/validation"
+  mode: "max"
+  dirpath: "${paths.output_dir}/checkpoints/"
+  filename: "epoch_{epoch:03d}_max_precision_at_1"
+  auto_insert_metric_name: False
+
+eer_checkpoint:
+  _target_: lightning.pytorch.callbacks.ModelCheckpoint
+  monitor: "EER/validation"
+  mode: "min"
+  dirpath: "${paths.output_dir}/checkpoints/"
+  filename: "epoch_{epoch:03d}_min_eer"
+  auto_insert_metric_name: False
+
+#r_precision_checkpoint:
+#  _target_: lightning.pytorch.callbacks.ModelCheckpoint
+#  monitor: "r_precision/validation"
+#  mode: "max"
+#  dirpath: "${paths.output_dir}/checkpoints/"
+#  filename: "epoch_{epoch:03d}_max_r_precision"
+#  auto_insert_metric_name: False
+#
+#majority_vote_at_30_checkpoint:
+#  _target_: lightning.pytorch.callbacks.ModelCheckpoint
+#  monitor: "majority_vote_at_30/validation"
+#  mode: "max"
+#  dirpath: "${paths.output_dir}/checkpoints/"
+#  filename: "epoch_{epoch:03d}_majority_vote_at_30"
+#  auto_insert_metric_name: False
+#
+#majority_vote_at_50_checkpoint:
+#  _target_: lightning.pytorch.callbacks.ModelCheckpoint
+#  monitor: "majority_vote_at_50/validation"
+#  mode: "max"
+#  dirpath: "${paths.output_dir}/checkpoints/"
+#  filename: "epoch_{epoch:03d}_majority_vote_at_50"
+#  auto_insert_metric_name: False
+
+# sequence_mrr_at_2_mins_checkpoint:
+#   _target_: lightning.pytorch.callbacks.ModelCheckpoint
+#   monitor: "sequence_mrr_at_2_mins/validation"
+#   mode: "max"
+#   dirpath: "${paths.output_dir}/checkpoints/"
+#   filename: "epoch_{epoch:03d}_sequence_mrr_at_2_mins"
+#   auto_insert_metric_name: False
+
+# accuracy_2_min_use_time_checkpoint:
+#   _target_: lightning.pytorch.callbacks.ModelCheckpoint
+#   monitor: "accuracy_2_min_use_time/validation"
+#   mode: "max"
+#   dirpath: "${paths.output_dir}/checkpoints/"
+#   filename: "epoch_{epoch:03d}_accuracy_2_min_use_time"
+#   auto_insert_metric_name: False

@@ -1,0 +1,6 @@
+
+_target_: src.verification_heads.SimilarityVerificationHead
+
+
+defaults:
+  - /distance: verification_cosine_similarity.yaml

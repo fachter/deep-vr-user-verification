@@ -1,0 +1,28 @@
+command:
+  - python3
+  - ${program}
+  - experiment=verification_head_search/mahalanobis_head/base_contrastive_loss.yaml
+  - ${args_no_hyphens}
+method: bayes
+metric:
+  goal: minimize
+  name: best_EER/validation
+name: transformer_mahalanobis_contrastive
+parameters:
+  lightning_module.loss_options.pos_margin:
+    distribution: q_uniform
+    min: 0
+    max: 0.3
+    q: 0.05
+  lightning_module.loss_options.neg_margin:
+    distribution: q_uniform
+    min: 0.3
+    max: 1
+    q: 0.05
+  datamodule.common_dataset_kwargs.window_size:
+    value: 1500
+  datamodule.train_dataset_kwargs.take_every_nth_sample:
+    value: 1500
+program: src/train.py
+project: deep-vr-user-verification
+entity: 99fe99

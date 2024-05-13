@@ -1,0 +1,17 @@
+# @package _global_
+
+defaults:
+  - verification_head_search/match_probability/base_match_probability_head.yaml
+  - override /distance: lp_distance.yaml
+
+tags: ["lp_distance", "transformer", "soft_contrastive_loss"]
+
+distance:
+  normalize_embeddings: True
+  p: 2
+
+#datamodule:
+#  data_split:
+#    train: 2
+#    validation: 3
+#    test: 20

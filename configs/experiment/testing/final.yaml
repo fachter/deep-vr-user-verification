@@ -1,0 +1,25 @@
+# @package _global_
+
+run_ids: []
+
+datamodule:
+  data_stats_path: ???
+  data_split:
+    data_folder: ../data/motion-password
+    train: 0
+    validation: 0
+    test: 20
+    seed: 12345
+    checksum: e24943723b8c77e24ef5cc05f1fc4835fc28f4fdd292cb33c3cababe7ab5ca76
+  batch_size: 300
+  common_dataset_kwargs:
+    window_size: ???
+    max_files_to_load_at_once: 50
+    coordinate_system:
+      forward: "x"
+      right: "z"
+      up: "y"
+  train_dataset_kwargs:
+    take_every_nth_sample: 1500
+  validation_dataset_kwargs:
+    take_every_nth_sample: 3000

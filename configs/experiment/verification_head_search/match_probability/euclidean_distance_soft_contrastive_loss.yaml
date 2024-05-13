@@ -1,0 +1,11 @@
+# @package _global_
+
+defaults:
+  - verification_head_search/match_probability/base_match_probability_head.yaml
+  - override /distance: lp_distance.yaml
+
+tags: ["euclidean_distance", "transformer", "soft_contrastive_loss"]
+
+distance:
+  normalize_embeddings: True
+  p: 2

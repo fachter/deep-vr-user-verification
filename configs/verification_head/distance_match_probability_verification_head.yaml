@@ -1,0 +1,5 @@
+_target_: src.verification_heads.DistanceMatchProbabilityVerificationHead
+
+
+defaults:
+  - /distance: kl_divergence_distance.yaml

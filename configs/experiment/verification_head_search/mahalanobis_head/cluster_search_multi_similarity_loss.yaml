@@ -1,0 +1,9 @@
+# @package _global_
+
+defaults:
+  - verification_head_search/mahalanobis_head/base_multi_similarity_loss.yaml
+
+verification_head:
+  k_cluster: MISSING
+  n_closest: MISSING
+

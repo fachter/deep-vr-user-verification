@@ -1,0 +1,8 @@
+_target_: src.models.rnn_model.RNNModel
+
+num_out_classes: MISSING
+
+cell_type: MISSING
+dropout: MISSING
+num_rnn_layers: MISSING
+rnn_hidden_size: MISSING

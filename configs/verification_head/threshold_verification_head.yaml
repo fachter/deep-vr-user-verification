@@ -1,0 +1,4 @@
+_target_: src.verification_heads.ThresholdVerificationHead
+
+defaults:
+  - /distance: kl_divergence_distance.yaml
